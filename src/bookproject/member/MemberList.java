@@ -43,7 +43,7 @@ public class MemberList extends JFrame implements ActionListener {
 		p1_lookup = new JButton("조회");	    p1_lookup.addActionListener(this);
 		p1_retouch = new JButton("수정");		p1_retouch.addActionListener(this);
 		p1_del = new JButton("삭제");			p1_del.addActionListener(this);
-		p1_back = new JButton("돌아가기");
+		p1_back = new JButton("돌아가기");     p1_back.addActionListener(this);
 
 		p1.add(p1_reset);
 		p1.add(p1_enrollment);
@@ -88,6 +88,7 @@ public class MemberList extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public static void dbroad() /*throws SQLException*/ {
+		model.setNumRows(0);
 		ResultSet re = DB.getResultSet("select * from members order by mb_name asc");
 		try {
 			while(re.next()) {
@@ -101,18 +102,6 @@ public class MemberList extends JFrame implements ActionListener {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		/*DBconnect db = new DBconnect();
-		//ResultSet re = db.getStat().executeQuery("SELECT * FROM members");
-		ResultSet re = db.getStat().executeQuery("select * from members order by name asc");
-		while(re.next()) {
-			String name = re.getString("name");
-			String num = re.getString("num");
-			String phone = re.getString("phone");
-			String address = re.getString("address");
-			String [] tmp = {name, num, phone, address};
-			model.addRow(tmp);
-		}
-		*/
 	}
 	public static void main(String[] args) {
 		DB.init();
@@ -124,11 +113,13 @@ public class MemberList extends JFrame implements ActionListener {
 		Object ob = e.getSource();
 		if(ob == p1_enrollment) new MemberEnrollment("회원등록", 300, 200, this);
 		else if(ob == p1_lookup) new MemberSearch("회원검색", 300, 200, this);
-		else if(ob == p1_retouch) new MemberRetouch("회원정보 수정", 300, 200);
-		else if(ob == p1_del) new MemberDelete("회원 삭제", 300, 200);
+		else if(ob == p1_retouch) new MemberRetouch("회원정보 수정", 300, 200, this);
+		else if(ob == p1_del) new MemberDelete("회원 삭제", 300, 200, this);
 		else if(ob == p1_reset) {
-			model.setNumRows(0);
 			dbroad();
+		}
+		else if(ob == p1_back) {
+			dispose();
 		}
 	}
 	public DefaultTableModel getModel() {

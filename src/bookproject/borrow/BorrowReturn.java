@@ -68,6 +68,7 @@ public class BorrowReturn extends JFrame implements ActionListener {
 
 		lbl_Bnum = new JLabel("도서번호");
 		tf_Bnum = new JTextField(10);
+		//tf_Bnum.addActionListener(this);
 		lbl_title = new JLabel("제    목");
 		tf_title = new JTextField(10);
 		tf_title.addActionListener(this);
@@ -140,7 +141,7 @@ public class BorrowReturn extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		boolean borrowState = false;
 
-		if (e.getSource() == btn_borrow | e.getSource() == tf_title) {
+		if (e.getSource() == btn_borrow || e.getSource() == tf_title) {
 
 			String mbNum = tf_rrn.getText();
 			String libCode = tf_Bnum.getText();
@@ -172,28 +173,39 @@ public class BorrowReturn extends JFrame implements ActionListener {
 						tf_Bnum.setText("");
 						tf_title.setText("");
 					}
-
 				}
 			}
 
-			if (borrowState == false && bookName.equals(libName) && !mbNum.equals("") && !libCode.equals("")) {
+			if ((borrowState == false && bookName.equals(libName)) || libCode.equals("") || libName.equals("")) {
+				if (mbNum.equals("")) {
+					JOptionPane.showMessageDialog( // 메시지창 출력
+							this, "회원주민번호를 입력해주세요.", "ErrorMessage", JOptionPane.ERROR_MESSAGE);
+				} else if (libCode.equals("") || libName.equals("")) {
+					JOptionPane.showMessageDialog( // 메시지창 출력
+							this, "도서정보를 전부 입력해주세요.", "ErrorMessage", JOptionPane.ERROR_MESSAGE);
+				} else {
+					String sql = "INSERT INTO JAVAJO.RENT VALUES((SELECT NVL(MAX(RENT_NO)+1,1) FROM JAVAJO.RENT), "
+							+ "(SELECT MB_NAME FROM MEMBERS WHERE MB_NUM = '" + mbNum + "'), "
+							+ "(SELECT MB_PHONE FROM MEMBERS WHERE MB_NUM = '" + mbNum + "'),"
+							+ "(SELECT LIB_CODE FROM LIB WHERE LIB_CODE = '" + libCode + "'),"
+							+ "(SELECT LIB_NAME FROM LIB WHERE LIB_CODE = '" + libCode + "'), TO_DATE(SYSDATE))";
 
-				String sql = "INSERT INTO JAVAJO.RENT VALUES((SELECT NVL(MAX(RENT_NO)+1,1) FROM JAVAJO.RENT), "
-						+ "(SELECT MB_NAME FROM MEMBERS WHERE MB_NUM = '" + mbNum + "'), "
-						+ "(SELECT MB_PHONE FROM MEMBERS WHERE MB_NUM = '" + mbNum + "'),"
-						+ "(SELECT LIB_CODE FROM LIB WHERE LIB_CODE = '" + libCode + "'),"
-						+ "(SELECT LIB_NAME FROM LIB WHERE LIB_CODE = '" + libCode + "'), TO_DATE(SYSDATE))";
+					String sqlState = "UPDATE LIB SET LIB_STATE='N' " + "WHERE LIB_CODE='" + libCode + "'";
 
-				String sqlState = "UPDATE LIB SET LIB_STATE='N' " + "WHERE LIB_CODE='" + libCode + "'";
+					DB.executeQuery(sql); // DB 내용 추가
+					DB.executeQuery(sqlState); // 대출여부 수정
 
-				DB.executeQuery(sql); // DB 내용 추가
-				DB.executeQuery(sqlState); // 대출여부 수정
+					tf_Bnum.setText("");
+					tf_title.setText("");
 
-				tf_Bnum.setText("");
-				tf_title.setText("");
-
-				model.setNumRows(0);
-				makeTable();
+					model.setNumRows(0);
+					makeTable();
+					
+					bbr.getModel().setNumRows(0);
+					bbr.makeTable();
+				}
+			} else {
+				System.out.println(123);
 			}
 		}
 
@@ -234,6 +246,9 @@ public class BorrowReturn extends JFrame implements ActionListener {
 
 			model.setNumRows(0);
 			makeTable();
+			
+			bbr.getModel().setNumRows(0);
+			bbr.makeTable();
 		}
 
 		if (e.getSource() == btn_cancel) {

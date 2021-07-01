@@ -1,6 +1,7 @@
 package bookproject.book;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -76,6 +77,7 @@ public class BookRetouch extends JFrame implements ActionListener {
 		lblLibCode = new JLabel("도서번호");
 		tfLibCode = new JTextField();
 		tfLibCode.setEditable(false);
+		tfLibCode.setBackground(Color.white);
 		p2.add(lblLibCode);
 		p2.add(tfLibCode);
 

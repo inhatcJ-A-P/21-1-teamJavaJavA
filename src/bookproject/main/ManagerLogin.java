@@ -62,7 +62,7 @@ public class ManagerLogin extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		DB.init();
+		DB.init(); // D
 		new ManagerLogin("관리자 로그인", 930, 430);
 
 	}
@@ -76,6 +76,7 @@ public class ManagerLogin extends JFrame implements ActionListener {
 			admin();
 			if (check == true) {
 				new BookProgram("도서 관리 프로그램", 1000, 700);
+				dispose();
 			}
 			else if (tfId.getText().equals("")|| tfPw.getText().equals("")) {
 				JOptionPane.showMessageDialog(null, "아이디와 비밀번호를 입력하세요.", "메시지", JOptionPane.INFORMATION_MESSAGE, null);
