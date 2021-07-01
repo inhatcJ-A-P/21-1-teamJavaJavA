@@ -1,20 +1,11 @@
 package bookproject.member; 
 
-import java.awt.print.Book.*;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-
+import bookproject.DB;
 
 public class MemberDelete extends JFrame implements ActionListener {
 	private JButton btnok, btnexit;
@@ -77,15 +68,6 @@ public class MemberDelete extends JFrame implements ActionListener {
 			String del = "DELETE FROM JAVAJO.MEMBERS "
 					+ "WHERE NUM='" + p2tf.getText() + "'" ;
 			DB.executeQuery(del);
-			/*DBconnect db = new DBconnect();
-			try {
-				String del = "DELETE FROM JAVAJO.MEMBERS "
-						+ "WHERE NUM='" + p2tf.getText() + "'" ;
-				db.getStat().executeUpdate(del);
-			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
 			JOptionPane.showMessageDialog(null, "삭제가 완료되었습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
 		}
 		

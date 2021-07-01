@@ -4,14 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -21,6 +15,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import bookproject.DB;
 
 public class MemberSearch extends JFrame implements ActionListener {
 	private JButton btnok, btnexit;
@@ -86,21 +82,6 @@ public class MemberSearch extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-			/*DBconnect db = new DBconnect();
-			ResultSet re;
-			try {
-				re = db.getStat().executeQuery("SELECT * FROM MEMBERS WHERE NUM = '" + p2tf.getText() + "' ");
-				while(re.next()) {
-					String name = re.getString("name");
-					String num = re.getString("num");
-					String phone = re.getString("phone");
-					String address = re.getString("address");
-					String [] tmp = {name, num, phone, address};
-					main.getModel().addRow(tmp);
-				}
-			} catch (SQLException e1) {
-				e1.printStackTrace();
-			}*/
 		}
 	}
 }
