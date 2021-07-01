@@ -1,6 +1,7 @@
 package bookproject.member;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -52,6 +53,7 @@ public class MemberRetouch extends JFrame implements ActionListener, KeyListener
 		JLabel p2lbl_2 = new JLabel("주민번호");
 		p2tf[1] = new JTextField();
 		p2tf[1].setEditable(false);
+		p2tf[1].setBackground(Color.white);
 
 		JLabel p2lbl_3 = new JLabel("연락처");
 		p2tf[2] = new JTextField();
