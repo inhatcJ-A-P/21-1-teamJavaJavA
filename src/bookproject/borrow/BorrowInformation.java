@@ -57,6 +57,7 @@ public class BorrowInformation extends JFrame implements ActionListener{
       
       JTable table = new JTable(model);
       JScrollPane scrollpane = new JScrollPane(table);
+      table.getTableHeader().setReorderingAllowed(false);
       p2.add(scrollpane);
       
       add(p1, BorderLayout.NORTH);
