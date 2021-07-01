@@ -7,6 +7,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.BufferedWriter;
 import java.util.Vector;
 
@@ -21,7 +23,7 @@ import bookproject.DB;
 
 
 
-public class MemberEnrollment extends JFrame  implements ActionListener {
+public class MemberEnrollment extends JFrame  implements ActionListener, KeyListener {
 
 	private JButton btnok, btnexit;
 	private JTextField p2tf[] = new JTextField[4]; //p2tf_1, p2tf_2, p2tf_3, p2tf_4;
@@ -56,11 +58,12 @@ public class MemberEnrollment extends JFrame  implements ActionListener {
 		
 		JLabel p2lbl_4 = new JLabel("주소:");
 		p2tf[3] = new JTextField();
+		p2tf[3].addKeyListener(this);
 		
 		p2.add(p2lbl_1); p2.add(p2tf[0]);	
 		p2.add(p2lbl_2); p2.add(p2tf[1]);	
 		p2.add(p2lbl_3); p2.add(p2tf[2]);	
-		p2.add(p2lbl_4); p2.add(p2tf[3]);	
+		p2.add(p2lbl_4); p2.add(p2tf[3]);
 		
 		JPanel p3 = new JPanel();
 		p3.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -108,7 +111,53 @@ public class MemberEnrollment extends JFrame  implements ActionListener {
 		     for(int j = 0; j < p2tf.length; j++) 
 					p2tf[j].setText("");
 		     JOptionPane.showMessageDialog(null, "처리가 완료되었습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
+		     dispose();
+		     main.dbroad();
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		int ob = e.getKeyCode();
+		boolean bool = true;
+		if(ob == 10) {
+			for(int i = 0; i < main.getModel().getRowCount(); i++) {
+				if(p2tf[1].getText().equals(main.getModel().getValueAt(i, 1))) {
+					JOptionPane.showMessageDialog(null, "중복된 아이디가 있습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
+					bool = false;
+				}
+			}
+			if(bool) {
+				String insert = "INSERT INTO JAVAJO.MEMBERS "
+						+ "(mb_NAME, mb_NUM, mb_PHONE, mb_ADDR) "
+						+ "VALUES('" + 
+						p2tf[0].getText() + "', '" + 
+						p2tf[1].getText() + "', '" + 
+						p2tf[2].getText() + "', '" + 
+						p2tf[3].getText() + "') ";
+				System.out.println(insert);
+				DB.executeQuery(insert);
+
+			}
+		     for(int j = 0; j < p2tf.length; j++) 
+					p2tf[j].setText("");
+		     JOptionPane.showMessageDialog(null, "처리가 완료되었습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
+		     dispose();
+		     main.dbroad();
+		}
+		
 	}
 
 }

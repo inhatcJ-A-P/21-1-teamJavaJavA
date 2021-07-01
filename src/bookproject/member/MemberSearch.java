@@ -6,6 +6,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -18,7 +20,7 @@ import javax.swing.JTextField;
 
 import bookproject.DB;
 
-public class MemberSearch extends JFrame implements ActionListener {
+public class MemberSearch extends JFrame implements ActionListener, KeyListener {
 	private JButton btnok, btnexit;
 	private MemberList main;
 	private Vector<String> con;
@@ -41,6 +43,7 @@ public class MemberSearch extends JFrame implements ActionListener {
 		JPanel p2 = new JPanel();
 		JLabel p2lbl_1 = new JLabel("회원주민번호:");
 		p2tf = new JTextField(10);
+		p2tf.addKeyListener(this);
 		p2.add(p2lbl_1); p2.add(p2tf);	
 		
 		JPanel p3 = new JPanel();
@@ -82,6 +85,44 @@ public class MemberSearch extends JFrame implements ActionListener {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			dispose();
+			
 		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		int ob = e.getKeyCode();
+		if(ob == 10) {
+			main.getModel().setNumRows(0);
+			ResultSet re = DB.getResultSet("SELECT * FROM MEMBERS WHERE mb_NUM = '" + p2tf.getText() + "' ");
+			try {
+				while(re.next()) {
+					String name = re.getString("mb_name");
+					String num = re.getString("mb_num");
+					String phone = re.getString("mb_phone");
+					String address = re.getString("mb_addr");
+					String [] tmp = {name, num, phone, address};
+					main.getModel().addRow(tmp);
+				}
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			dispose();
+	
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
