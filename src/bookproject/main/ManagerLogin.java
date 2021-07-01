@@ -62,7 +62,7 @@ public class ManagerLogin extends JFrame implements ActionListener {
 	}
 
 	public static void main(String[] args) {
-		DB.init();
+		DB.init(); // D
 		new ManagerLogin("관리자 로그인", 930, 430);
 
 	}
