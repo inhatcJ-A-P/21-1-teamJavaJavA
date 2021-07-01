@@ -274,7 +274,7 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 		}
 
 		if (e.getSource() == btn_back) {
-			System.exit(0);
+			this.dispose();
 		}
 	}
 }
