@@ -121,7 +121,7 @@ public class MemberList extends JFrame implements ActionListener {
 		else if(ob == p1_back) {
 			dispose();
 		}
-	}
+	}	
 	public DefaultTableModel getModel() {
 		return model;
 	}
