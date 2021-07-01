@@ -66,7 +66,7 @@ public class MemberDelete extends JFrame implements ActionListener {
 		else if(ob == btnok) {
 		
 			String del = "DELETE FROM JAVAJO.MEMBERS "
-					+ "WHERE NUM='" + p2tf.getText() + "'" ;
+					+ "WHERE mb_NUM='" + p2tf.getText() + "'" ;
 			DB.executeQuery(del);
 			JOptionPane.showMessageDialog(null, "삭제가 완료되었습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
 		}

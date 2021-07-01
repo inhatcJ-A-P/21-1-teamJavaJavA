@@ -95,7 +95,7 @@ public class MemberEnrollment extends JFrame  implements ActionListener {
 			}
 			if(bool) {
 				String insert = "INSERT INTO JAVAJO.MEMBERS "
-						+ "(NAME, NUM, PHONE, ADDRESS) "
+						+ "(mb_NAME, mb_NUM, mb_PHONE, mb_ADDR) "
 						+ "VALUES('" + 
 						p2tf[0].getText() + "', '" + 
 						p2tf[1].getText() + "', '" + 
@@ -104,20 +104,6 @@ public class MemberEnrollment extends JFrame  implements ActionListener {
 				System.out.println(insert);
 				DB.executeQuery(insert);
 
-/*				try {
-					String insert = "INSERT INTO JAVAJO.MEMBERS "
-							+ "(NAME, NUM, PHONE, ADDRESS) "
-							+ "VALUES('" + 
-							p2tf[0].getText() + "', '" + 
-							p2tf[1].getText() + "', '" + 
-							p2tf[2].getText() + "', '" + 
-							p2tf[3].getText() + "') ";
-					db.getStat().executeUpdate(insert);
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				*/
 			}
 		     for(int j = 0; j < p2tf.length; j++) 
 					p2tf[j].setText("");

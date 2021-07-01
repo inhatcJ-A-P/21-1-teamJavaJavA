@@ -78,13 +78,13 @@ public class MemberRetouch extends JFrame implements ActionListener {
 		Object ob = e.getSource();
 		if(ob == btnback) dispose();
 		else if(ob == btnsearch) {
-			ResultSet re = DB.getResultSet("SELECT * FROM MEMBERS WHERE NUM = '" + retouch.getText() + "' ");
+			ResultSet re = DB.getResultSet("SELECT * FROM MEMBERS WHERE mb_NUM = '" + retouch.getText() + "' ");
 			try {
 				while(re.next()) {
-					String name = re.getString("name");
-					String num = re.getString("num");
-					String phone = re.getString("PHONE");
-					String address = re.getString("address");
+					String name = re.getString("mb_name");
+					String num = re.getString("mb_num");
+					String phone = re.getString("mb_PHONE");
+					String address = re.getString("mb_addr");
 					
 					p2tf[0].setText(name);
 					p2tf[1].setText(num);
@@ -115,10 +115,10 @@ public class MemberRetouch extends JFrame implements ActionListener {
 		}
 		else if(ob == btnok) {
 			String update = "UPDATE JAVAJO.MEMBERS "
-					+ "SET NAME='" + p2tf[0].getText()  + "', "
-					+ "PHONE='" +    p2tf[2].getText() +  "', "	
-					+ "ADDRESS='" +  p2tf[3].getText() + "' "
-					+ "WHERE NUM='"+ p2tf[1].getText() + "' ";
+					+ "SET mb_NAME='" + p2tf[0].getText()  + "', "
+					+ "mb_PHONE='" +    p2tf[2].getText() +  "', "	
+					+ "mb_ADDR='" +  p2tf[3].getText() + "' "
+					+ "WHERE mb_NUM='"+ p2tf[1].getText() + "' ";
 			System.out.println(update);
 			DB.executeQuery(update);
 			/*DBconnect db = new DBconnect();

@@ -68,13 +68,13 @@ public class MemberSearch extends JFrame implements ActionListener {
 		if(ob == btnexit) dispose();
 		if(ob == btnok) {
 			main.getModel().setNumRows(0);
-			ResultSet re = DB.getResultSet("SELECT * FROM MEMBERS WHERE NUM = '" + p2tf.getText() + "' ");
+			ResultSet re = DB.getResultSet("SELECT * FROM MEMBERS WHERE mb_NUM = '" + p2tf.getText() + "' ");
 			try {
 				while(re.next()) {
-					String name = re.getString("name");
-					String num = re.getString("num");
-					String phone = re.getString("phone");
-					String address = re.getString("address");
+					String name = re.getString("mb_name");
+					String num = re.getString("mb_num");
+					String phone = re.getString("mb_phone");
+					String address = re.getString("mb_addr");
 					String [] tmp = {name, num, phone, address};
 					main.getModel().addRow(tmp);
 				}

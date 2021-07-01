@@ -88,13 +88,13 @@ public class MemberList extends JFrame implements ActionListener {
 		setVisible(true);
 	}
 	public static void dbroad() /*throws SQLException*/ {
-		ResultSet re = DB.getResultSet("select * from members order by name asc");
+		ResultSet re = DB.getResultSet("select * from members order by mb_name asc");
 		try {
 			while(re.next()) {
-				String name = re.getString("name");
-				String num = re.getString("num");
-				String phone = re.getString("phone");
-				String address = re.getString("address");
+				String name = re.getString("mb_name");
+				String num = re.getString("mb_num");
+				String phone = re.getString("mb_phone");
+				String address = re.getString("mb_addr");
 				String [] tmp = {name, num, phone, address};
 				model.addRow(tmp);
 			}
