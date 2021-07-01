@@ -43,7 +43,7 @@ public class MemberList extends JFrame implements ActionListener {
 		p1_lookup = new JButton("조회");	    p1_lookup.addActionListener(this);
 		p1_retouch = new JButton("수정");		p1_retouch.addActionListener(this);
 		p1_del = new JButton("삭제");			p1_del.addActionListener(this);
-		p1_back = new JButton("돌아가기");
+		p1_back = new JButton("돌아가기");     p1_back.addActionListener(this);
 
 		p1.add(p1_reset);
 		p1.add(p1_enrollment);
@@ -117,6 +117,9 @@ public class MemberList extends JFrame implements ActionListener {
 		else if(ob == p1_del) new MemberDelete("회원 삭제", 300, 200, this);
 		else if(ob == p1_reset) {
 			dbroad();
+		}
+		else if(ob == p1_back) {
+			dispose();
 		}
 	}
 	public DefaultTableModel getModel() {
