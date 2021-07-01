@@ -35,6 +35,14 @@ public class BorrowReturn extends JFrame implements ActionListener {
 	private String date;
 	private BookBorrowReturn bbr;
 	private String bookNum;
+	
+	public JTextField getTfBnum() {
+		return tf_Bnum;
+	}
+
+	public JTextField getTfTitle() {
+		return tf_title;
+	}
 
 	public BorrowReturn(String title, int width, int height, BookBorrowReturn bbr) {
 		this.bbr = bbr;
@@ -255,5 +263,4 @@ public class BorrowReturn extends JFrame implements ActionListener {
 			this.dispose();
 		}
 	}
-
 }

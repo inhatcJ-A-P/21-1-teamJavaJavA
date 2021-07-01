@@ -37,6 +37,7 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 	private String bPublisher;
 	private String bPrice;
 	private String bBorrowInfo;
+	private BorrowReturn br;
 
 	public JTable getTable() {
 		return table;
@@ -235,7 +236,14 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == btn_br) {
-			new BorrowReturn("대여/반납", 500, 600, this);
+			
+			String libCode = tf_Bnum.getText();
+			String libName = tf_Bname.getText();
+			
+			br = new BorrowReturn("대여/반납", 500, 600, this);
+			
+			br.getTfBnum().setText(libCode);
+			br.getTfTitle().setText(libName);
 		}
 
 		if (e.getSource() == btn_search | e.getSource() == tf_Bname) {
@@ -269,7 +277,13 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 		}
 
 		if (e.getSource() == btn_reset) {
-			model.setNumRows(0);
+			tf_Bname.setText("");
+			tf_Bnum.setText("");
+			tf_title.setText("");
+			tf_author.setText("");
+			tf_publisher.setText("");
+			tf_price.setText("");
+			tf_borrow.setText("");
 		}
 
 		if (e.getSource() == btn_refresh) {
