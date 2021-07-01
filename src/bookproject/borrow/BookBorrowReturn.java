@@ -41,6 +41,10 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 	public JTable getTable() {
 		return table;
 	}
+	
+	public DefaultTableModel getModel() {
+		return model;
+	}
 
 	public BookBorrowReturn(String title, int width, int height) {
 		this.setTitle(title);
@@ -194,7 +198,7 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 
 	}
 
-	private void makeTable() {
+	public void makeTable() {
 		String sql = "SELECT * FROM LIB ORDER BY LIB_CODE";
 		ResultSet rs = DB.getResultSet(sql);
 
