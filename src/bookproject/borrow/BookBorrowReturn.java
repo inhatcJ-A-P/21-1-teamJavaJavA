@@ -46,7 +46,7 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 		this.setTitle(title);
 		setSize(width, height);
 		setLocationRelativeTo(this);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		// setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		p1 = new JPanel();
 		p1.setLayout(new BorderLayout());
