@@ -94,9 +94,9 @@ public class MemberEnrollment extends JFrame  implements ActionListener, KeyList
 				if(p2tf[1].getText().equals(main.getModel().getValueAt(i, 1))) {
 					JOptionPane.showMessageDialog(null, "중복된 아이디가 있습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
 					bool = false;
+					for(int j = 0; j < p2tf.length; j++) 
+						p2tf[j].setText("");
 				}
-				for(int j = 0; j < p2tf.length; j++) 
-					p2tf[j].setText("");
 			}
 			if(bool && !p2tf[1].equals("")) {
 				String insert = "INSERT INTO JAVAJO.MEMBERS "
@@ -108,8 +108,7 @@ public class MemberEnrollment extends JFrame  implements ActionListener, KeyList
 						p2tf[3].getText() + "') ";
 				System.out.println(insert);
 				DB.executeQuery(insert);
-				for(int j = 0; j < p2tf.length; j++) 
-					p2tf[j].setText("");
+				
 		     JOptionPane.showMessageDialog(null, "처리가 완료되었습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
 		     dispose();
 		     main.dbroad();
@@ -141,9 +140,10 @@ public class MemberEnrollment extends JFrame  implements ActionListener, KeyList
 				if(p2tf[1].getText().equals(main.getModel().getValueAt(i, 1))) {
 					JOptionPane.showMessageDialog(null, "중복된 아이디가 있습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
 					bool = false;
+					for(int j = 0; j < p2tf.length; j++) 
+						p2tf[j].setText("");
 				}
-				for(int j = 0; j < p2tf.length; j++) 
-					p2tf[j].setText("");
+				
 			}
 			if(bool) {
 				System.out.println("!");
@@ -156,9 +156,8 @@ public class MemberEnrollment extends JFrame  implements ActionListener, KeyList
 						p2tf[3].getText() + "') ";
 				System.out.println(insert);
 				DB.executeQuery(insert);
-				for(int j = 0; j < p2tf.length; j++) 
-					p2tf[j].setText("");
 		     JOptionPane.showMessageDialog(null, "처리가 완료되었습니다.", "메시지", JOptionPane.INFORMATION_MESSAGE);
+		     
 		     dispose();
 		     main.dbroad();
 			}
