@@ -4,30 +4,19 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 
-import javax.swing.AbstractButton;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 import bookproject.DB;
@@ -66,7 +55,7 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 		lbl_Bname = new JLabel("도서명");
 		tf_Bname = new JTextField(13);
 		tf_Bname.addActionListener(this);
-		
+
 		btn_search = new JButton("검색");
 		btn_search.addActionListener(this);
 
@@ -91,7 +80,7 @@ public class BookBorrowReturn extends JFrame implements ActionListener {
 		tf_Bnum.setEditable(false);
 		tf_Bnum.setBackground(Color.white);
 		p1_2.add(tf_Bnum);
-		
+
 		lbl_title = new JLabel("제      목");
 		lbl_title.setLocation(330, 20);
 		lbl_title.setSize(60, 20);

@@ -1,20 +1,10 @@
 package bookproject.borrow;
 
 import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.JButton;
@@ -25,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 import javax.swing.table.DefaultTableModel;
 
 import bookproject.DB;
@@ -36,8 +25,7 @@ public class BorrowReturn extends JFrame implements ActionListener {
 	private JLabel lbl_rrn, lbl_Bnum, lbl_title;
 	private JTextField tf_rrn, tf_Bnum, tf_title;
 	private JButton btn_borrow, btn_return, btn_cancel;
-	private String[] tmp;
-	private Vector<String> con, str;
+	private Vector<String> con;
 	private DefaultTableModel model;
 	private String bId;
 	private String mName;
@@ -153,29 +141,27 @@ public class BorrowReturn extends JFrame implements ActionListener {
 		boolean borrowState = false;
 
 		if (e.getSource() == btn_borrow | e.getSource() == tf_title) {
-			
+
 			String mbNum = tf_rrn.getText();
 			String libCode = tf_Bnum.getText();
 			String libName = tf_title.getText();
-			
+
 			libCode = libCode.toUpperCase();
 
-			String rsBName =  "SELECT LIB_NAME "
-		               + "FROM LIB "
-		               + "WHERE LIB_CODE = '" + libCode + "'";
-		    ResultSet rsName = DB.getResultSet(rsBName);
-		    
-		    String bookName = "";
-		    
-		    try {
-				if(rsName.next()) {
+			String rsBName = "SELECT LIB_NAME " + "FROM LIB " + "WHERE LIB_CODE = '" + libCode + "'";
+			ResultSet rsName = DB.getResultSet(rsBName);
+
+			String bookName = "";
+
+			try {
+				if (rsName.next()) {
 					bookName = rsName.getString(1);
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		    
+
 			for (int i = 0; i < bbr.getTable().getRowCount(); i++) {
 				if (libCode.equals(bbr.getTable().getValueAt(i, 0))) {
 					if (bbr.getTable().getValueAt(i, 5).equals("N")) {
@@ -205,50 +191,47 @@ public class BorrowReturn extends JFrame implements ActionListener {
 
 				tf_Bnum.setText("");
 				tf_title.setText("");
-				
+
 				model.setNumRows(0);
 				makeTable();
 			}
 		}
-		
+
 		if (e.getSource() == btn_return) {
-			
+
 			bookNum = "";
 			String mbNum = tf_rrn.getText();
-			String libCode = tf_Bnum.getText();
-			
-			String rsMemNum =  "SELECT MB_NAME "
-		               + "FROM MEMBERS "
-		               + "WHERE MB_NUM = '" + mbNum + "'";
-		    ResultSet rsNum = DB.getResultSet(rsMemNum);
-		    
-		    String memName = "";
-		    
-		    try {
-				if(rsNum.next()) {
+
+			String rsMemNum = "SELECT MB_NAME " + "FROM MEMBERS " + "WHERE MB_NUM = '" + mbNum + "'";
+			ResultSet rsNum = DB.getResultSet(rsMemNum);
+
+			String memName = "";
+
+			try {
+				if (rsNum.next()) {
 					memName = rsNum.getString(1);
 				}
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-		    
+
 			for (int i = 0; i < model.getRowCount(); i++) {
 				if (memName.equals(model.getValueAt(i, 1))) {
 					bookNum = (String) model.getValueAt(i, 4);
-					}
 				}
-			
-			String sql = "DELETE FROM RENT WHERE MEM_NAME = (SELECT MB_NAME FROM MEMBERS WHERE MB_NUM = '"
-					+ mbNum + "')";
-			
+			}
+
+			String sql = "DELETE FROM RENT WHERE MEM_NAME = (SELECT MB_NAME FROM MEMBERS WHERE MB_NUM = '" + mbNum
+					+ "')";
+
 			String sqlState = "UPDATE LIB SET LIB_STATE='Y' WHERE LIB_CODE='" + bookNum + "'";
-			
+
 			DB.executeQuery(sql); // DB 내용 삭제
 			DB.executeQuery(sqlState); // 대출여부 수정
 
 			mbNum = "";
-			
+
 			model.setNumRows(0);
 			makeTable();
 		}
